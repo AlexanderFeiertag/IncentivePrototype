@@ -1,0 +1,36 @@
+span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.control-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 400px;
+}
+
+.mat-column-actions {
+  width: 200px;
+
+  .pay {
+    color: #4CAF50;
+  }
+
+  .edit {
+    color: #2196F3;
+  }
+
+  .delete {
+    color: #F44336;
+  }
+}

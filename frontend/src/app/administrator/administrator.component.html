@@ -1,0 +1,11 @@
+<nav [backgroundColor]="'primary'" [tabPanel]="tabPanel" mat-tab-nav-bar>
+  <a [active]="isActive('employees')" mat-tab-link routerLink="./employees">Employees</a>
+  <a [active]="isActive('transactions')" mat-tab-link routerLink="./transactions">Transactions</a>
+  <a [active]="isActive('nft-incentives')" [disabled]="!isAdmin()" mat-tab-link routerLink="./nft-incentives">NFT-Incentives</a>
+  <a [active]="isActive('currency-incentives')" [disabled]="!isAdmin()" mat-tab-link routerLink="./currency-incentives">Currency-Incentives</a>
+</nav>
+
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>
+

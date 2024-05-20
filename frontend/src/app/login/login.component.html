@@ -1,0 +1,14 @@
+<br>
+<span>
+  <h1>Management-Login</h1>
+  <mat-form-field style="width: 400px">
+    <mat-label>Select an Admin or Manager</mat-label>
+    <mat-select [(ngModel)]="selectedAdminOrManager" required>
+      @for (item of adminsAndManagers; track item) {
+        <mat-option [value]="item" [disabled]="item.address != getConnectedAccountAddress()">{{ item.email }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button (click)="login()" color="primary" disabled="{{selectedAdminOrManager === undefined}}" mat-raised-button>Login</button>
+</span>

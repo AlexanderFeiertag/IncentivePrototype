@@ -1,0 +1,16 @@
+nav {
+  z-index: 0;
+}
+
+mat-tab-nav-panel {
+  display: block;
+  margin: 20px;
+}
+
+.mat-tab-link {
+  opacity: 1;
+}
+
+.mat-tab-link:focus {
+  color: #800080; /* obvious color for demo */
+}

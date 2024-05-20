@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>NFT-Transfer</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>E-Mail</mat-label>
+    <input [(ngModel)]="data.receiverEmail" disabled matInput required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Address</mat-label>
+    <input [(ngModel)]="data.receiverAddress" disabled matInput required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>NFT</mat-label>
+    <mat-select [(ngModel)]="data.tokenAddress" (selectionChange)="addTokenName(data.tokenAddress)" required>
+      @for (nftIncentive of nftIncentives; track nftIncentives) {
+        <mat-option [value]="nftIncentive.address">{{ nftIncentive.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Reason</mat-label>
+    <input [(ngModel)]="data.reason" matInput required>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button [mat-dialog-close]="data" cdkFocusInitial color="primary" mat-raised-button
+          [disabled]="data.receiverEmail.length == 0 || data.receiverAddress.length == 0 || data.tokenAddress == null || data.reason.length == 0">
+    Send
+  </button>
+  <button (click)="onNoClick()" color="warn" mat-raised-button>Cancel</button>
+</mat-dialog-actions>

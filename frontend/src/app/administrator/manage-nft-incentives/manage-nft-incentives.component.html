@@ -1,0 +1,56 @@
+<span>
+  <span class="control-container">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input #input (keyup)="applyFilter($event)" matInput placeholder="john">
+    </mat-form-field>
+    <button (click)="createNftIncentiveDialog()" color="primary" mat-raised-button>
+      <mat-icon>person_add</mat-icon>
+      Create NFT-Incentive
+    </button>
+  </span>
+
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort>
+    <ng-container matColumnDef="address">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Address</th>
+      <td *matCellDef="let element" mat-cell><app-address-directive [address]="element.address" [subpath]="'address'"/></td>
+    </ng-container>
+
+    <ng-container matColumnDef="symbol">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Symbol</th>
+      <td *matCellDef="let element" mat-cell> {{ element.symbol }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Name</th>
+      <td *matCellDef="let element" mat-cell>{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="icon">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Icon</th>
+      <td *matCellDef="let element" mat-cell>
+        <mat-icon>{{ element.icon }}</mat-icon>
+        {{ element.icon }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th *matHeaderCellDef mat-header-cell> Actions</th>
+      <td *matCellDef="let element" mat-cell>
+        <button (click)="editNftDialog(element.address, element.symbol, element.name, element.icon)" class="edit" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteNftIncentive(element.address)" class="delete" mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+  <br/>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30, 40, 50]"
+                 aria-label="Select page of periodic elements"
+                 showFirstLastButtons>
+  </mat-paginator>
+</span>

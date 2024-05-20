@@ -1,0 +1,76 @@
+span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.control-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 400px;
+}
+
+.mat-column-actions {
+  width: 210px;
+}
+
+.actionsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+
+.payNft {
+  color: #4CAF50 !important;
+}
+
+.payToken {
+  color: #c7c254 !important;
+}
+
+.edit {
+  color: #2196F3 !important;
+}
+
+.delete {
+  color: #F44336 !important;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.dirty {
+  background: #ffe5e5;
+}
+
+.dirty:hover {
+  background: #ffe0e0 !important;
+}

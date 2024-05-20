@@ -1,0 +1,15 @@
+<mat-toolbar class="toolbar mat-elevation-z6" color="primary">
+  <span>{{ data.data.title }} </span>
+  <span><span *ngIf="email !== undefined">{{ email }}</span></span>
+  <span>
+    <button (click)="navigateTo(data.data.actionRoute)" class="actionButton" mat-stroked-button>
+      <mat-icon>{{ data.data.actionIcon }}</mat-icon>
+      <span>{{ data.data.actionLabel }}</span>
+    </button>
+  </span>
+</mat-toolbar>
+
+<span class="router-container">
+  <router-outlet></router-outlet>
+</span>
+

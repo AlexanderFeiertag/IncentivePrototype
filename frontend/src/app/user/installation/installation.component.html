@@ -1,0 +1,43 @@
+<mat-stepper #stepper [linear]="false" orientation="vertical">
+  <mat-step [completed]="false" label="Install MetaMask Plugin + Create Wallet">
+    <button (click)="navigateTo('https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn')" color="primary" mat-raised-button>
+      <img src="../../../assets/metamask.png">
+      Install MetaMask for Chrome
+    </button>
+    <button (click)="navigateTo('https://microsoftedge.microsoft.com/addons/detail/metamask/ejbalbakoplchlghecdalmeeeajnimhm')" color="primary" mat-raised-button>
+      <img src="../../../assets/metamask.png">
+      Install MetaMask for Edge
+    </button>
+    <button (click)="navigateTo('https://addons.mozilla.org/de/firefox/addon/ether-metamask/')" color="primary" mat-raised-button>
+      <img src="../../../assets/metamask.png">
+      Install MetaMask for Firefox
+    </button>
+  </mat-step>
+  <mat-step [completed]="false" label="Add zksync Network to your Wallet">
+    <button (click)="addZksyncToMetaMask()" color="primary" mat-raised-button>
+      Add zksync Network to your Wallet
+    </button>
+  </mat-step>
+  <mat-step [completed]="false" label="Add Currency-Coin to your Wallet">
+    <button (click)="addTokenToMetaMask()" color="primary" mat-raised-button>
+      Add Currency-Coin to your Wallet
+    </button>
+  </mat-step>
+  <mat-step [completed]="false" [stepControl]="firstFormGroup" label="Register your Wallet">
+    <form [formGroup]="firstFormGroup">
+      <span class="form-container">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Public-Address</mat-label>
+          <input formControlName="address" matInput placeholder="address" readonly required>
+        </mat-form-field>
+        <div>
+          <button (click)="createEmployee()" [disabled]="!firstFormGroup.valid" color="primary" mat-raised-button>Register</button>
+        </div>
+      </span>
+    </form>
+  </mat-step>
+</mat-stepper>

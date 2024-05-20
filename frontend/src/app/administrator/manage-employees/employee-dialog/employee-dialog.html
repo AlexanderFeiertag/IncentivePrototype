@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>E-Mail</mat-label>
+    <input [(ngModel)]="data.email" [disabled]="data.title !== 'Create Employee'" matInput required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Address</mat-label>
+    <input [(ngModel)]="data.address" [disabled]="data.title === 'Edit Employee'" matInput required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Manager</mat-label>
+    <mat-select [(ngModel)]="data.manager" required>
+      @for (employee of employees; track employee) {
+        <mat-option [value]="employee.address">{{ employee.email }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-label>Is Administrator?</mat-label>
+  <mat-checkbox [(ngModel)]="data.administrator"></mat-checkbox>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button [mat-dialog-close]="data" cdkFocusInitial color="primary" mat-raised-button
+          [disabled]="data.email.length == 0 || data.address.length == 0">
+    Save
+  </button>
+  <button (click)="onNoClick()" color="warn" mat-raised-button>Cancel</button>
+</mat-dialog-actions>

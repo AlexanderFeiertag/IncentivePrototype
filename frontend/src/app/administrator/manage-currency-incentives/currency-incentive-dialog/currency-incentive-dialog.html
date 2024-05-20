@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{ data.isCreate ? "Create Currency-Incentive" : "Edit Currency-Incentive" }}</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input [(ngModel)]="data.name" [disabled]="!data.isCreate" matInput required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <input [(ngModel)]="data.description" matInput required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Icon</mat-label>
+    <input [(ngModel)]="data.icon" matInput required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Price</mat-label>
+    <input [(ngModel)]="data.price" matInput required>
+  </mat-form-field>
+
+  <mat-label>Is Currency-CurrencyIncentive available?</mat-label>
+  <mat-checkbox [(ngModel)]="data.available"></mat-checkbox>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button [mat-dialog-close]="data" cdkFocusInitial color="primary" mat-raised-button
+          [disabled]="data.name.length == 0 || data.description.length == 0 || data.icon.length == 0 || data.price <= 0">
+    Save
+  </button>
+  <button (click)="onNoClick()" color="warn" mat-raised-button>Cancel</button>
+</mat-dialog-actions>

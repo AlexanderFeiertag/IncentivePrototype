@@ -1,0 +1,4 @@
+<a href="{{environment.chainExplorer}}/{{subpath}}/{{address}}" target="_blank">
+  {{ getShortenedAddress() }}
+  <span *ngIf="email !== undefined && email != null && email.length > 0">({{ email }})</span>
+</a>

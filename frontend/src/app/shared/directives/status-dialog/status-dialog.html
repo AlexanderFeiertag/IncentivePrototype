@@ -1,0 +1,16 @@
+<span class="header-row"><h2 mat-dialog-title>{{ data.title }}</h2>
+  <mat-icon *ngIf="data.successful" style="color: green; font-weight: bold; padding-right: 24px">done</mat-icon>
+  <mat-icon *ngIf="!data.successful" style="color: red; font-weight: bold; padding-right: 24px">warning</mat-icon>
+</span>
+
+<mat-progress-bar mode="determinate" [value]="progressbarValue"></mat-progress-bar>
+
+<mat-dialog-content>
+  <p>{{ data.message }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button [mat-dialog-close]="data" cdkFocusInitial color="primary" mat-raised-button>
+    Close
+  </button>
+</mat-dialog-actions>

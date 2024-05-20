@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Currency-Transfer</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>E-Mail</mat-label>
+    <input [(ngModel)]="data.email" disabled matInput required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Address</mat-label>
+    <input [(ngModel)]="data.address" disabled matInput required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Token-Amount</mat-label>
+    <input [(ngModel)]="data.tokenAmount" matInput required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Reason</mat-label>
+    <input [(ngModel)]="data.reason" matInput required>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button [mat-dialog-close]="data" cdkFocusInitial color="primary" mat-raised-button
+          [disabled]="data.email.length == 0 || data.address.length == 0 || data.tokenAmount <= 0 || data.reason.length == 0">
+    Send
+  </button>
+  <button (click)="onNoClick()" color="warn" mat-raised-button>Cancel</button>
+</mat-dialog-actions>

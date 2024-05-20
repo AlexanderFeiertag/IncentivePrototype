@@ -1,0 +1,118 @@
+<span>
+  <span class="control-container">
+     <mat-form-field>
+    <mat-label>Filter</mat-label><input #input (keyup)="applyFilter($event)" matInput placeholder="john">
+    </mat-form-field>
+    <button (click)="createEmployeeDialog()" [hidden]="isManagementActionHidden()" color="primary" mat-raised-button>
+      <mat-icon>person_add</mat-icon>
+      Create Employee
+    </button>
+  </span>
+
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort multiTemplateDataRows>
+    <ng-container matColumnDef="email">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Email</th>
+      <td *matCellDef="let element" mat-cell> {{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Address</th>
+      <td *matCellDef="let element" mat-cell><app-address-directive [address]="element.address" [subpath]="'address'"/></td>
+    </ng-container>
+
+    <ng-container matColumnDef="manager">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Manager</th>
+      <td *matCellDef="let element" mat-cell>
+        {{ getManagerName(element) }}
+    </ng-container>
+
+    <ng-container matColumnDef="isAdministrator">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Is Administrator?</th>
+      <td *matCellDef="let element" mat-cell>
+        <mat-checkbox [checked]="element.administrator" disabled *ngIf="element.clean"> {{ element.administrator ? "Yes" : "No" }}</mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th *matHeaderCellDef mat-header-cell> Actions</th>
+      <td *matCellDef="let element" mat-cell>
+        <span class="actionsContainer">
+          <button *ngIf="!element.clean" mat-stroked-button class="delete" (click)="importToBlockchain(element)">
+            <mat-icon>cloud_upload</mat-icon>
+            <span>Complete</span>
+          </button>
+          <button (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation(); loadBalance(element)"
+                  [hidden]="!element.clean"
+                  aria-label="expand row"
+                  mat-icon-button>
+            @if (expandedElement === element) {
+              <mat-icon>keyboard_arrow_up</mat-icon>
+            } @else {
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            }
+          </button>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [disabled]="!element.clean" (click)="openNftTransferDialog(element.email, element.address)">
+              <mat-icon class="payNft">token</mat-icon>
+              <span style="display: flex; align-items: start">Send NFT</span>
+            </button>
+            <button mat-menu-item [disabled]="!element.clean" (click)="openCurrencyTransferDialog(element.email, element.address)">
+              <mat-icon class="payToken">paid</mat-icon>
+              <span style="display: flex; align-items: start">Send Currency-Coin</span>
+            </button>
+            <button mat-menu-item [disabled]="!element.clean" (click)="showTransactions(element)">
+              <mat-icon color="primary">open_in_new</mat-icon>
+              <span style="display: flex; align-items: start">Show Transactions</span>
+            </button>
+            <button mat-menu-item [disabled]="isManagementActionHidden()" (click)="editEmployeeDialog(element)">
+              <mat-icon class="edit">edit</mat-icon>
+              <span style="display: flex; align-items: start">Edit Employee</span>
+            </button>
+            <button mat-menu-item [disabled]="isManagementActionHidden()" (click)="deleteEmployee(element)">
+              <mat-icon class="delete">delete</mat-icon>
+              <span style="display: flex; align-items: start">Delete Employee</span>
+            </button>
+          </mat-menu>
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td *matCellDef="let element" [attr.colspan]="displayedColumns.length" mat-cell>
+        <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+             class="element-detail">
+          <span *ngIf="expandedElementBalance === undefined">
+            <mat-spinner [diameter]="30"></mat-spinner>
+          </span>
+          <span *ngIf="expandedElementBalance !== undefined" style="display: flex; flex-direction: row; gap: 10px">
+            <ul>
+              <li *ngFor="let balance of expandedElementBalance">
+                {{ balance.amount }} x {{ balance.symbol !== null ? balance.name : 'Currency-Coin' }}
+              </li>
+            </ul>
+          </span>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr (click)="expandedElement = (expandedElement === row ? null : (row.clean ? row : null)); loadBalance(row)"
+        *matRowDef="let row; columns: displayedColumns;"
+        [class.expanded-row]="expandedElement === row"
+        class="element-row"
+        [ngClass]="{ 'dirty' : row.clean != true }"
+        mat-row></tr>
+    <tr *matRowDef="let row; columns: ['expandedDetail']"
+        class="detail-row"
+        [ngClass]="{ 'dirty' : row.clean != true }"
+        mat-row></tr>
+  </table>
+  <br/>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30, 40, 50]"
+                 aria-label="Select page of periodic elements"
+                 showFirstLastButtons>
+  </mat-paginator>
+</span>

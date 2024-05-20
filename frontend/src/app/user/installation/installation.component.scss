@@ -1,0 +1,27 @@
+button {
+  min-width: 290px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+::ng-deep .mat-vertical-stepper-content {
+  visibility: visible !important;
+  height: 100% !important;
+}
+
+mat-form-field {
+  width: 500px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  flex-wrap: wrap;
+}

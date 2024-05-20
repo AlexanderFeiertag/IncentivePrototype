@@ -1,0 +1,28 @@
+.toolbar {
+  position: relative;
+  z-index: 1 !important;
+
+  span {
+    width: 33% !important;
+  }
+
+  span:first-child {
+    text-align: left;
+  }
+
+  span:nth-child(2) {
+    text-align: center;
+  }
+
+  span:last-child {
+    text-align: right;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.actionButton {
+  width: 260px;
+}

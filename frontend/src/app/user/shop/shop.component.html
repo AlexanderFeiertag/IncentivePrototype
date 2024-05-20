@@ -1,0 +1,17 @@
+<span class="incentive-container">
+  <mat-card *ngFor="let incentiveDTO of incentives" class="incentive">
+    <mat-card-header>
+      <mat-card-title>{{ incentiveDTO.name }}</mat-card-title>
+      <mat-card-subtitle>{{ incentiveDTO.price }} Currency-Coin</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-icon> {{ incentiveDTO.icon }} </mat-icon>
+      <p>{{ incentiveDTO.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button *ngIf="editVisible" mat-stroked-button type="button">Edit</button>
+      <div fxFlex></div>
+      <button (click)="buy(incentiveDTO)" *ngIf="buyVisible" [disabled]="!hasEnoughBalance(incentiveDTO)" mat-stroked-button type="button">Buy</button>
+    </mat-card-actions>
+  </mat-card>
+</span>

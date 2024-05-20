@@ -1,0 +1,68 @@
+<span>
+  <span class="control-container">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input #input (keyup)="applyFilter($event)" matInput placeholder="john">
+    </mat-form-field>
+    <button (click)="createCurrencyIncentiveDialog()" color="primary" mat-raised-button>
+      <mat-icon>playlist_add</mat-icon>
+      Create Currency-Incentive
+    </button>
+  </span>
+
+  <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort>
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Name</th>
+      <td *matCellDef="let element" mat-cell> {{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Description</th>
+      <td *matCellDef="let element" mat-cell>{{ element.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="icon">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Icon</th>
+      <td *matCellDef="let element" mat-cell>
+        <mat-icon>{{ element.icon }}</mat-icon>
+        {{ element.icon }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Price</th>
+      <td *matCellDef="let element" mat-cell>{{ element.price }} Currency-Coins</td>
+    </ng-container>
+
+    <ng-container matColumnDef="available">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Available</th>
+      <td *matCellDef="let element" mat-cell>
+        <mat-checkbox [checked]="element.available" disabled> {{ element.available ? "Yes" : "No" }}</mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th *matHeaderCellDef mat-header-cell> Actions</th>
+      <td *matCellDef="let element" mat-cell>
+        <button (click)="editIncentiveDialog(element.name, element.description, element.icon, element.price, element.available)" class="edit" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteIncentive(element.name)" class="delete" mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr *matNoDataRow class="mat-row">
+      <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>
+    </tr>
+  </table>
+  <br/>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30, 40, 50]"
+                 aria-label="Select page of periodic elements"
+                 showFirstLastButtons>
+  </mat-paginator>
+</span>
